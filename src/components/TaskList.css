@@ -1,0 +1,37 @@
+// TaskList.js
+
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { deleteTask } from '../redux/tasksSlice';
+import '../App.css'; // Import your CSS file for styling
+
+const TaskList = () => {
+  const tasks = useSelector((state) => state.tasks.tasks); // Access tasks array from Redux store
+  const dispatch = useDispatch(); // Create a dispatch function
+
+  const handleDeleteTask = (index) => {
+    dispatch(deleteTask(index)); // Dispatch deleteTask action with task index
+  };
+
+  const handleEditTask = (index) => {
+    // Implement edit functionality as per your requirements
+    console.log("Editing task at index:", index);
+  };
+
+  return (
+    <div>
+      <h2 className="task-list-heading">Task List</h2>
+      <ul className="task-list">
+        {tasks.map((task, index) => (
+          <li key={index} className="task-item">
+            {task}
+            <button onClick={() => handleEditTask(index)} className="task-button">Edit</button>
+            <button onClick={() => handleDeleteTask(index)} className="task-button">Delete</button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+export default TaskList;
